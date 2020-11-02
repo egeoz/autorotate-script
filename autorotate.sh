@@ -1,11 +1,11 @@
 #!/bin/sh
 
-> .sensor.log
+> /tmp/sensor.log
 
-monitor-sensor >> .sensor.log 2>&1 &
+monitor-sensor >> /tmp/sensor.log 2>&1 &
 
-while inotifywait -e modify .sensor.log; do
-ORIENTATION=$(tail -n 1 .sensor.log | grep 'orientation' | grep -oE '[^ ]+$')
+while inotifywait -e modify /tmp/sensor.log; do
+ORIENTATION=$(tail -n 1 /tmp/sensor.log | grep 'orientation' | grep -oE '[^ ]+$')
 
 case "$ORIENTATION" in
 normal)
